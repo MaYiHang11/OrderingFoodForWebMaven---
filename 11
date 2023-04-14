@@ -1,0 +1,164 @@
+SET FOREIGN_KEY_CHECKS=0;
+--
+- Table structure for `tb_book`
+--
+DROP TABLE IF EXISTS `tb_book`;
+CREATE TABLE `tb_book`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`bookName` varchar(255) DEFAULT NULL,
+`bookTypeId` int(11) NOT NULL,
+`bookCaseId` int(11) NOT NULL,
+`bookPressId` int(11) NOT NULL,
+`bookAuthor` varchar(255) DEFAULT NULL,
+`bookPrice` double DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+--
+- Records of tb_book
+--
+INSERT INTO `tb_book` VALUES ('1','三体','2','1','1','刘慈欣','50');
+INSERT INTO `tb_book` VALUES ('2','C挪威的森林','1','2','2','村上春树','28.8');
+--
+- Table structure for `tb_bookborrow`
+--
+DROP TABLE IF EXISTS `tb_bookborrow`;
+CREATE TABLE `tb_bookborrow`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`readerId` int(11) NOT NULL,
+`bookId` int(11) NOT NULL,
+`borrowData` date NOT NULL,
+`returnFlag` int(1) NOT NULL,
+`returnData` date NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+--
+- Records of tb_bookborrow
+--
+INSERT INTO `tb_bookborrow` VALUES ('1','1','1','2019-03-21','1','2019-03-30');
+INSERT INTO `tb_bookborrow` VALUES ('2','2','2','2019-03-08','0','2019-04-07');
+INSERT INTO `tb_bookborrow` VALUES ('3','2','1','2019-03-14','1','2019-03-22');
+--
+- Table structure for `tb_booktype`
+--
+DROP TABLE IF EXISTS `tb_booktype`;
+CREATE TABLE `tb_booktype`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`typeName` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+--
+- Records of tb_booktype
+--
+INSERT INTO `tb_booktype` VALUES ('1','程序语言设计');
+INSERT INTO `tb_booktype` VALUES ('2','数据库');
+--
+- Table structure for `tb_case`
+--
+DROP TABLE IF EXISTS `tb_case`;
+CREATE TABLE `tb_case`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`caseName` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+--
+- Records of tb_case
+--
+INSERT INTO `tb_case` VALUES ('1','数据库');
+INSERT INTO `tb_case` VALUES ('2','编程语言');
+--
+- Table structure for `tb_library`
+--
+DROP TABLE IF EXISTS `tb_library`;
+CREATE TABLE `tb_library`(
+`id` int(11) NOT NULL,
+`libraryName` varchar(255) DEFAULT NULL,
+`curator` varchar(255) DEFAULT NULL,
+`address` varchar(255) DEFAULT NULL,
+`phone` varchar(255) DEFAULT NULL,
+`URL` varchar(255) DEFAULT NULL,
+`introduce` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+- Records of tb_library
+--
+INSERT INTO `tb_library` VALUES ('1','天天','小天','江西','1234','www.tt','尚学');
+--
+- Table structure for `tb_logintype`
+--
+DROP TABLE IF EXISTS `tb_logintype`;
+CREATE TABLE `tb_logintype`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`typeName` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+--
+- Records of tb_logintype
+--
+INSERT INTO `tb_logintype` VALUES ('1','学生');
+INSERT INTO `tb_logintype` VALUES ('2','教师');
+INSERT INTO `tb_logintype` VALUES ('3','管理员');
+--
+- Table structure for `tb_permission`
+--
+DROP TABLE IF EXISTS `tb_permission`;
+CREATE TABLE `tb_permission`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`userId` int(11) NOT NULL,
+`manager` int(1) DEFAULT NULL,
+`caseInfo` int(1) DEFAULT NULL,
+`readerType` int(1) DEFAULT NULL,
+`readerInfo` int(1) DEFAULT NULL,
+`bookType` int(1) DEFAULT NULL,
+`bookInfo` int(1) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+--
+- Records of tb_permission
+--
+INSERT INTO `tb_permission` VALUES ('2','2','0','0','0','1','0','0');
+INSERT INTO `tb_permission` VALUES ('3','3','1','1','1','1','1','1');
+--
+- Table structure for `tb_press`
+--
+DROP TABLE IF EXISTS `tb_press`;
+CREATE TABLE `tb_press`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`pressName` varchar(255) DEFAULT NULL,
+`pressAddress` varchar(255) DEFAULT NULL,
+`pressPhone` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+--
+- Records of tb_press
+--
+INSERT INTO `tb_press` VALUES ('1','重庆大学出版社','重庆','123');
+INSERT INTO `tb_press` VALUES ('2','北京大学出版社','北京','456');
+--
+- Table structure for `tb_stock`
+--
+DROP TABLE IF EXISTS `tb_stock`;
+CREATE TABLE `tb_stock`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`bookSum` int(11) DEFAULT NULL,
+`bookId` int(11) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+--
+- Records of tb_stock
+--
+INSERT INTO `tb_stock` VALUES ('1','80','1');
+INSERT INTO `tb_stock` VALUES ('2','35','2');
+--
+- Table structure for `tb_user`
+--
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) DEFAULT NULL,
+`password` varchar(255) DEFAULT NULL,
+`loginTypeId` int(11) NOT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+--
+- Records of tb_user
